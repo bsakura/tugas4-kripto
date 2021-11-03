@@ -72,6 +72,7 @@ def decrypt(ciphertext, l, n, mu):
 
 if (__name__=='__main__'):
   pub, priv = generateKey()
+  print(pub, priv)
   print(pub.g, pub.n, priv.l, priv.mu)
 
   plaintext = 'aku suka membaca'

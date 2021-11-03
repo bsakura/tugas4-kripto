@@ -76,14 +76,24 @@ def decrypt(pk, ciphertext):
     plain = [chr(int(char2)) for char2 in aux]
     return ''.join(plain)
 
+def generatePrime(n):
+   odds = range(3, n+1, 2)
+   sieve = set(sum([list(range(q*q, n+1, q+q)) for q in odds], []))
+   return [2] + [p for p in odds if p not in sieve]
+
+primeList = generatePrime(1000)
+
 
 if __name__ == '__main__':
 
 
-    p = 17
-    q = 23
+    p = random.choice(primeList)
+    q = random.choice(primeList)
 
     public, private = generate_key_pair(p, q)
+    print(public, private)
+    public = (public[0], public[1])
+    print (public)
 
 
     message = "ayam kecil"
