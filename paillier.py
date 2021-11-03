@@ -6,7 +6,7 @@ def generatePrime(n):
    sieve = set(sum([list(range(q*q, n+1, q+q)) for q in odds], []))
    return [2] + [p for p in odds if p not in sieve]
 
-primeList = generatePrime(10000)
+primeList = generatePrime(1000)
 
 def generateKey():
   p = random.choice(primeList)
@@ -31,23 +31,23 @@ class PublicKey:
 class PrivateKey:
   def __init__(self, p, q, n):
     self.l = lcm(p-1, q-1)
-    self.mu = self.modinv(self.l, n)
+    self.mu = modinv(self.l, n)
+
+def modinv(a, p, iter=10000):
+  if (a==0):
+    print(f'0 no inverse mod {p}')
+    return 0
   
-  def modinv(a, p, iter=1000000):
-    if (a==0):
-      print(f'0 no inverse mod {p}')
-      return 0
-    
-    r, d = a, 1
-    for i in range(min(p, iter)):
-      d = ((p//r+1)*d) % p
-      r = (d*a) % p
-      if (r==1):
-        break
-    else:
-      print(f'{a} no inverse mod {p}')
-    
-    return d
+  r, d = a, 1
+  for i in range(min(p, iter)):
+    d = ((p//r+1)*d) % p
+    r = (d*a) % p
+    if (r==1):
+      break
+  else:
+    print(f'{a} no inverse mod {p}')
+  
+  return d
 
 def encrypt(plaintext, g, n):
   r = random.randint(0, n)
@@ -72,7 +72,11 @@ def decrypt(ciphertext, l, n, mu):
 
 if (__name__=='__main__'):
   pub, priv = generateKey()
+  print(pub.g, pub.n, priv.l, priv.mu)
+
   plaintext = 'aku suka membaca'
+  print(plaintext)
+
   encryptedText = encrypt(plaintext, pub.g, pub.n)
   print(encryptedText)
 
