@@ -48,6 +48,11 @@ while (flag):
       pub, priv = rsa.generate_key_pair(p, q)
       print(f'Public Key: {pub}')
       print(f'Private Key: {priv}')
+      with open('file/rsa.pub', 'w') as file:
+        file.write(str(pub))
+      with open('file/rsa.priv', 'w') as file:
+        file.write(str(priv))
+
       encryptedText = rsa.encrypt(pub, text)
       print(f'Pesan hasil enkripsi: {encryptedText}')
 
@@ -56,6 +61,13 @@ while (flag):
       g = random.randint(2, q)
       key = elgamal.generate_key(q)
       h = elgamal.power(g, key, q)
+      with open('file/elgamal.p', 'w') as file:
+        file.write(str(p))
+      with open('file/elgamal.q', 'w') as file:
+        file.write(str(q))
+      with open('file/elgamal.key', 'w') as file:
+        file.write(str(key))
+
       encryptedText, p = elgamal.encrypt(text, q, h, g)
       print(f'Nilai p: {p}')
       print(f'Nilai q: {q}')
@@ -68,6 +80,15 @@ while (flag):
       print(f'Public n: {pub.n}')
       print(f'Private l: {priv.l}')
       print(f'Private mu: {priv.mu}')
+      with open('file/paillier.pubg', 'w') as file:
+        file.write(str(pub.g))
+      with open('file/paillier.pubn', 'w') as file:
+        file.write(str(pub.n))
+      with open('file/paillier.privl', 'w') as file:
+        file.write(str(priv.l))
+      with open('file/paillier.privmu', 'w') as file:
+        file.write(str(priv.mu))
+
       encryptedText = paillier.encrypt(text, pub.g, pub.n)
       print(f'Pesan hasil enkripsi: {encryptedText}')
 

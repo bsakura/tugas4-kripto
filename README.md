@@ -3,7 +3,7 @@
 ## How To Run
 1. Clone this repository
 2. Open this repository in your cmd
-3. Run 'python main.py'
+3. Run `python main.py`
 
 ## Preview
 ### RSA
